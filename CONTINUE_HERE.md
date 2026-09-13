@@ -15,7 +15,8 @@ submission. Start here if the prior operator is unavailable.
 - AWS deployment: not performed
 - Managed memory: not added
 - Last live attempt: blocked by AWS account verification
-- Remote custody: verify before assuming `finious/genie-lite` exists
+- Remote custody: **PROVEN** at public repository `finious/genie-lite`
+- Two-shift execution card: `docs/GENIE_LITE_TWO_SHIFT_DIRECTION_2026-09-13.md`
 
 The detailed blocker receipt is
 `docs/evidence/LIVE_NOVA_ATTEMPT_2026-09-13.md`.
@@ -38,22 +39,14 @@ calls or touching deployment.
 
 ## 2. Establish GitHub custody
 
-Check whether `https://github.com/finious/genie-lite` exists. If it does not,
-Jimmy creates an empty **public** repository with:
+Public GitHub custody is now established at:
 
-- no README
-- no `.gitignore`
-- no license
+`https://github.com/finious/genie-lite`
 
-Then publish only the clean `main` branch:
-
-```bash
-git push -u origin main
-```
-
-After pushing, a receiver must independently open the repository and confirm
-the README heading, current commit, and `docs/BUILD_STATUS_2026-09-13.md`.
-Access is not knowledge until a receiver reads the object.
+Before continuing after any handoff, a receiver should independently open the
+repository and confirm the README heading, current commit, and
+`docs/BUILD_STATUS_2026-09-13.md`. Access is not knowledge until a receiver
+reads the object.
 
 ## 3. Retry the live Nova proof once
 
