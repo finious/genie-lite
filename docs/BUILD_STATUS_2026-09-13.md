@@ -1,62 +1,42 @@
-# GENIE LITE BUILD STATUS
+# Genie Lite Build Status
 
-**Date:** 2026-09-13  
-**Status:** LOCAL SPECIMEN BUILT / PUBLIC CUSTODY PROVEN / DEPLOYED / RUNTIME READY / LIVE NOVA INVOCATION THROTTLED
+**Status:** deployed / runtime READY / deterministic proof passing / deployed Nova invocation throttled
 
-## Captured state
+## Verified state
 
-- AgentCore 0.29.0 project exists locally at `/Users/jimleyshon/genielite`.
-- Runtime model is explicitly configured as `amazon.nova-pro-v1:0`.
-- Tutorial Claude loader, Exa MCP route, calculator, and generic prompt are removed from the active application.
+- Runtime model configured as `amazon.nova-pro-v1:0`.
+- Tutorial defaults and example MCP/calculator code are removed from the active application.
 - Echo routes to one CREATE specialist inside one Strands/AgentCore runtime.
-- State, authority, receipts, correction propagation, and recovery authority expiration have deterministic tests.
+- State, authority, receipt, correction, and recovery behavior have deterministic tests.
 - Six credit-free tests pass.
 - AgentCore configuration validates.
-- Public remote custody is proven at `https://github.com/finious/genie-lite`.
-- Receiver-side repository access and handoff readability are proven.
-- Deployment authorization was explicitly given by Jimmy before live deployment.
+- Public repository is readable at `https://github.com/finious/genie-lite`.
 - CDK bootstrap completed.
-- Deployment diff showed one expected stack with an execution role, execution policy, and AgentCore runtime.
+- Deployment diff showed the expected AgentCore stack with execution role, policy, and runtime.
 - CloudFormation deployment completed successfully.
-- `agentcore status --json` returned success, `deploymentState: deployed`, and runtime detail `READY` in `us-east-1`.
-- Follow-up `agentcore deploy --diff --yes` reported no differences.
-- Follow-up `agentcore deploy -y -v` reported no changes.
-- First deployed Nova invocation reached the model path but returned a provider `ThrottlingException` for daily token quota.
+- `agentcore status --json` reported `success: true`, `deploymentState: deployed`, and runtime detail `READY` in `us-east-1`.
+- Follow-up diff reported no differences.
+- Repeat deploy reported no changes.
+- First deployed Nova invocation reached the model path but returned a provider daily-token `ThrottlingException`.
 
-## Claim currently earned
+## Earned claim
 
 > Echo can carry human intent into specialist work without becoming the specialist, while preserving human authority and inspectable receipts.
 
-The deterministic suite supports the mechanism. The AgentCore deployment and READY runtime are proven. A successful deployed Nova normal/correction trace is still required before claiming live deployed model behavior.
+The deterministic suite supports the mechanism. The AgentCore deployment and READY runtime are proved.
 
-## PROVED
+## Evidence still available to upgrade
 
-- deterministic Echo→CREATE routing
-- correction propagation
-- explicit authority and claim limits in receipts
-- stale consequential authority expires on recovery
-- six credit-free tests
-- AgentCore validation
-- public custody / receiver-readable continuation
-- explicit human deployment authorization
-- successful AgentCore deployment
-- runtime READY
-- idempotent post-deploy diff / no-change redeploy
+A successful deployed normal request followed by the correction in the same session would additionally prove the frozen behavior on the deployed Strands/AgentCore runtime.
 
-## BLOCKED
+Until that happens, the project does not claim successful deployed model behavior.
 
-- deployed live normal/correction trace is blocked by provider daily token quota
+## Not claimed
 
-## NOT CLAIMED
-
-- managed AgentCore Memory
 - production readiness
+- managed AgentCore Memory
 - generalized long-term companion behavior
 - managed durable recovery
-- successful deployed model behavior until an invocation completes
+- automatic continuation of authority after interruption
 
-## Next evidence upgrade
-
-When work resumes, make one deliberate deployed invocation attempt. If the normal request succeeds, run the frozen correction in the same session and capture the changed result plus receipt. If provider throttling repeats, preserve the throttle receipt and stop retries.
-
-> **THE SUBMISSION IS REAL NOW. LIVE INVOCATION IS AN EVIDENCE UPGRADE, NOT THE BIRTH CERTIFICATE.**
+See [`EVIDENCE_AND_CLAIM_FENCE.md`](EVIDENCE_AND_CLAIM_FENCE.md) for the public truth table.
