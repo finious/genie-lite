@@ -1,32 +1,47 @@
 # Devpost Submission Draft — Genie Lite
 
+## Track
+
+**Professional Agents**
+
+## Tagline
+
+Human-led specialist routing with explicit authority, correction, recovery, and receipts.
+
 ## One-line summary
 
-Genie Lite is a human-led AI proof showing how conversational intent can route to specialist work without transferring human authority, with inspectable receipts for routing, correction, recovery, and limits.
+Genie Lite is a Strands-based professional agent that carries human intent into specialist work without silently transferring human authority.
 
-## What it does
+## The problem
 
-Genie Lite separates three things that AI systems often blur together: conversation, specialist work, and authority.
+As professionals use AI for more than one-shot answers, the coordination burden grows fast. A person has to remember what they asked for, which capability did the work, whether a correction actually changed the work, what is safe to resume after interruption, and what the system has or has not actually proved.
 
-A human speaks to Echo. Echo carries the request to a bounded CREATE specialist. CREATE returns specialist work. Echo brings the result back without claiming authority it does not have. If the human corrects the direction, the next specialist brief/result must materially change. Receipts make the route, return, authority state, and unproven claims inspectable.
+Most agent experiences optimize for capability. Genie Lite focuses on **inspectability under delegation**.
 
-The frozen contest seam is:
+## Who it is for
 
-> **JIMMY → ECHO → CREATE → ECHO → JIMMY**
+Professionals, makers, creators, and small teams using AI across multi-step or specialist work where correction, handoff, recovery, and human authority matter.
 
-## Why we built it
+## What Genie Lite does
 
-The central problem is not just whether an AI can do useful work. It is whether a human can tell what happened, who did what, what remains unproved, and whether old authority silently leaked across interruption or recovery.
+A human speaks to **Echo**, the conversational bridge. Echo carries the request to **CREATE**, one bounded specialist. CREATE returns specialist work through Echo. If the human corrects the direction, the next specialist brief and result must materially change. Receipts expose the route, return, authority state, and claim limits.
 
-Genie Lite treats those boundaries as part of the product.
+The contest seam is:
 
-## How it works
+> **HUMAN → ECHO → CREATE → ECHO → HUMAN**
 
-- **Echo** is the conversational bridge.
-- **CREATE** is one visible specialist behind a bounded route.
-- **Authority state** stays explicit instead of being inferred from conversational continuity.
-- **Receipts** record request, route, specialist return, authority state, and claim limits.
-- **Recovery** restores useful state without silently restoring stale consequential authority.
+Recovery restores useful state, but stale consequential authority does not silently resume.
+
+## Why it matters
+
+The human should be able to carry less operational complexity without surrendering the decisions that matter.
+
+Genie Lite makes four distinctions visible:
+
+> Conversation does not equal authority.  
+> Routing does not equal execution.  
+> Execution does not equal verification.  
+> Recovery does not equal permission to resume.
 
 ## Built with
 
@@ -36,37 +51,49 @@ Genie Lite treats those boundaries as part of the product.
 - Python
 - AgentCore CodeZip deployment
 
+## Technical implementation
+
+Genie Lite uses a Strands/AgentCore runtime with one visible specialist route. The implementation includes explicit state, authority, correction, recovery, and receipt behavior rather than burying those boundaries in the system prompt.
+
+The project is deployed to Amazon Bedrock AgentCore in `us-east-1`; AgentCore reports the runtime as deployed and `READY`. A post-deploy diff reports no infrastructure drift.
+
 ## What is proved
 
 - six deterministic credit-free tests pass
 - Echo→CREATE routing is visible
-- correction changes the next specialist brief/artifact in deterministic proof
-- stale consequential authority expires on recovery
-- receipts expose authority state and claim limits
+- correction changes the next specialist brief/artifact
+- receipts expose route, return, authority state, and limits
+- stale consequential authority expires after interruption/recovery
 - AgentCore configuration validates
-- the public repository is receiver-readable
-- Genie Lite is deployed to AgentCore in `us-east-1`
-- AgentCore reports the runtime as deployed and `READY`
-- post-deploy diff reports no changes
+- public repository is receiver-readable
+- AgentCore deployment completed successfully
+- runtime reports deployed / `READY`
+- post-deploy diff reports no differences
 
 ## Current live-provider limitation
 
-The first deployed Nova invocation reached the runtime but was blocked by a provider daily-token `ThrottlingException`. We preserved that as an inspectable limitation instead of changing models, regions, or architecture to manufacture a green result.
+The first deployed Amazon Nova Pro invocation reached the runtime but returned a provider daily-token `ThrottlingException`.
 
-If the quota clears before judging/submission close, we will add the deployed normal/correction trace as an evidence upgrade. The deployed runtime and deterministic proof already exist independently of that provider quota.
+We preserved that as an inspectable limitation instead of changing models, regions, or architecture to manufacture a green result. If the quota clears before submission close, the deployed normal/correction trace will be added as an evidence upgrade.
+
+Until then, we do **not** claim a successful deployed model conversation.
 
 ## What we do not claim
 
-Genie Lite is not presented as production-ready, as managed long-term memory, or as a generalized AI companion. It does not claim managed durable recovery or automatic continuation of authority after interruption.
+Genie Lite is not presented as production-ready, managed long-term memory, a generalized AI companion, or managed durable recovery. It does not automatically continue human authority after interruption.
 
 ## What we learned
 
-A useful human-led agent system needs more than capability. It needs boundaries that survive handoffs and interruption:
+A useful human-led agent system needs more than capability. It needs boundaries that survive correction, handoff, and interruption.
 
-> Conversation does not equal authority. Routing does not equal execution. Recovery does not equal permission to resume.
+The most important design lesson was:
 
-The design goal is to let the human carry less operational complexity without surrendering the decisions that matter.
+> **The human can carry less complexity without giving the system more authority.**
 
 ## Repository
 
 https://github.com/finious/genie-lite
+
+## Judge path
+
+https://github.com/finious/genie-lite/blob/main/docs/JUDGE_START_HERE.md
