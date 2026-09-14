@@ -1,61 +1,62 @@
 # GENIE LITE BUILD STATUS
 
 **Date:** 2026-09-13  
-**Status:** LOCAL SPECIMEN BUILT / PUBLIC CUSTODY PROVEN / CREDIT-FREE TESTS PASS / NOT DEPLOYED
+**Status:** LOCAL SPECIMEN BUILT / PUBLIC CUSTODY PROVEN / DEPLOYED / RUNTIME READY / LIVE NOVA INVOCATION THROTTLED
 
 ## Captured state
 
-- AgentCore 0.29.0 scaffold exists locally at `/Users/jimleyshon/genielite`.
-- Original scaffold is preserved in local commit `c10f023` (`Genie Lamp Creation`).
+- AgentCore 0.29.0 project exists locally at `/Users/jimleyshon/genielite`.
 - Runtime model is explicitly configured as `amazon.nova-pro-v1:0`.
 - Tutorial Claude loader, Exa MCP route, calculator, and generic prompt are removed from the active application.
 - Echo routes to one CREATE specialist inside one Strands/AgentCore runtime.
 - State, authority, receipts, correction propagation, and recovery authority expiration have deterministic tests.
-- Six credit-free tests passed in the live local repository.
-- AgentCore configuration passed `agentcore validate --json` after installation.
-- Import smoke-check confirmed the runtime loads Echo and `amazon.nova-pro-v1:0`.
-- `uv.lock` was refreshed after removal of the tutorial MCP dependency.
-- The first deliberate local Nova attempt reached Bedrock but was blocked by AWS account verification; the local server was stopped and the exact receipt is preserved in `docs/evidence/LIVE_NOVA_ATTEMPT_2026-09-13.md`.
-- Public remote custody is now proven at `https://github.com/finious/genie-lite`.
-- An independent receiver successfully opened the public repository and read `CONTINUE_HERE.md` and this build-status object.
-- Two-shift continuation direction is published at `docs/GENIE_LITE_TWO_SHIFT_DIRECTION_2026-09-13.md`.
+- Six credit-free tests pass.
+- AgentCore configuration validates.
+- Public remote custody is proven at `https://github.com/finious/genie-lite`.
+- Receiver-side repository access and handoff readability are proven.
+- Deployment authorization was explicitly given by Jimmy before live deployment.
+- CDK bootstrap completed.
+- Deployment diff showed one expected stack with an execution role, execution policy, and AgentCore runtime.
+- CloudFormation deployment completed successfully.
+- `agentcore status --json` returned success, `deploymentState: deployed`, and runtime detail `READY` in `us-east-1`.
+- Follow-up `agentcore deploy --diff --yes` reported no differences.
+- Follow-up `agentcore deploy -y -v` reported no changes.
+- First deployed Nova invocation reached the model path but returned a provider `ThrottlingException` for daily token quota.
 
 ## Claim currently earned
 
 > Echo can carry human intent into specialist work without becoming the specialist, while preserving human authority and inspectable receipts.
 
-The deterministic suite supports the mechanism. A live Nova trace is still required to support the Strands runtime behavior claim.
+The deterministic suite supports the mechanism. The AgentCore deployment and READY runtime are proven. A successful deployed Nova normal/correction trace is still required before claiming live deployed model behavior.
 
-## Earned custody proof
+## PROVED
 
-- public GitHub repository exists
-- default branch is `main`
-- receiver-side repository access succeeded
-- receiver independently read the continuation handoff and build status
-- no AWS runtime deployment has been performed
+- deterministic Echo→CREATE routing
+- correction propagation
+- explicit authority and claim limits in receipts
+- stale consequential authority expires on recovery
+- six credit-free tests
+- AgentCore validation
+- public custody / receiver-readable continuation
+- explicit human deployment authorization
+- successful AgentCore deployment
+- runtime READY
+- idempotent post-deploy diff / no-change redeploy
 
-## Not yet earned
+## BLOCKED
 
-- completed live Nova normal/correction trace (currently blocked by AWS account verification)
-- clean-clone proof
-- AgentCore package preview / dry-run receipt
-- AWS deployment
-- deployed invocation proof
+- deployed live normal/correction trace is blocked by provider daily token quota
+
+## NOT CLAIMED
+
+- managed AgentCore Memory
+- production readiness
+- generalized long-term companion behavior
 - managed durable recovery
+- successful deployed model behavior until an invocation completes
 
-## Gates
+## Next evidence upgrade
 
-- Retry live Nova only after AWS's stated verification window has elapsed.
-- Do not change models, regions, or permissions merely to route around account verification.
-- Clean-clone / receiver reproducibility must pass before deployment preview.
-- Deployment must stop for the exact human gate: **AUTHORIZE DEPLOY**.
-- Managed AgentCore Memory is outside the contest specimen unless all minimum proof is already complete.
+When work resumes, make one deliberate deployed invocation attempt. If the normal request succeeds, run the frozen correction in the same session and capture the changed result plus receipt. If provider throttling repeats, preserve the throttle receipt and stop retries.
 
-## Next receipts
-
-1. Retry the frozen live Nova normal/correction trace once account verification allows it.
-2. Capture either the successful trace or one fresh external-blocker receipt and stop retries.
-3. Perform the clean-clone / receiver reproducibility check.
-4. Only after local proof passes, run AgentCore deployment preview/diff and return consequences for human review.
-
-> **PUBLIC CUSTODY IS PROVEN. LIVE MODEL BEHAVIOR AND DEPLOYMENT ARE NOT.**
+> **THE SUBMISSION IS REAL NOW. LIVE INVOCATION IS AN EVIDENCE UPGRADE, NOT THE BIRTH CERTIFICATE.**
