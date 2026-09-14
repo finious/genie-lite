@@ -1,94 +1,122 @@
 # Genie Lite
 
-Genie Lite is a contest-sized proof of one claim:
+**Agents for Humans Hackathon · Professional Agents**
 
-> Echo can carry human intent into specialist work without becoming the specialist, while preserving human authority and inspectable receipts.
+Genie Lite is a human-led AI agent built with **Strands Agents** and deployed on **Amazon Bedrock AgentCore**. It tests a practical question:
 
-The frozen seam is **JIMMY → ECHO → CREATE → ECHO → JIMMY**.
+> Can a conversational AI carry human intent into specialist work without becoming the specialist or silently inheriting human authority?
 
-Genie Lite is built with Strands and deployed to Amazon Bedrock AgentCore in `us-east-1` using `amazon.nova-pro-v1:0`.
+The contest seam is:
 
-## Current status
+> **HUMAN → ECHO → CREATE → ECHO → HUMAN**
 
-**PROVED**
+Echo is the conversational bridge. CREATE is the bounded specialist. Receipts make the route, return, authority state, correction, and limits inspectable.
 
-- visible Echo-to-CREATE routing in the deterministic specimen
+## The problem
+
+Professionals increasingly work through AI across multiple tasks and specialist capabilities. The hard part is not only getting useful output. It is keeping track of what the human asked for, which specialist did the work, whether a correction actually changed the work, what authority still applies, and what remains unproved after interruption.
+
+Genie Lite reduces that coordination burden without turning conversational continuity into hidden permission.
+
+## What it demonstrates
+
+- visible Echo → CREATE specialist routing
 - correction propagation into the next brief and artifact
 - explicit authority state and claim limits in receipts
-- useful state recovery with stale consequential authority expired
-- six credit-free deterministic tests passing
-- AgentCore configuration validation
-- public GitHub custody and receiver-readable handoff
+- recovery of useful state while stale consequential authority expires
+- six deterministic, credit-free tests
+- AgentCore validation
+- successful AgentCore deployment in `us-east-1`
+- deployed runtime state: `READY`
+- clean post-deploy diff / no-change redeploy
 
-**DEPLOYED**
+## Current live-runtime limitation
 
-- AgentCore stack deployed successfully
-- GenieLite runtime reports `READY`
-- follow-up CDK diff reports no differences
-- repeated deploy reports no changes
+The first deployed Nova invocation reached the runtime but returned a provider daily-token `ThrottlingException`. That limitation is preserved as evidence rather than hidden or routed around.
 
-**BLOCKED**
+So the current evidence boundary is precise:
 
-- the first deployed Nova invocation reached the runtime but was throttled by the provider daily token quota
-- therefore the final deployed normal/correction live trace is not yet proved
+- **deployment:** proved
+- **runtime READY:** proved
+- **deterministic behavior:** proved
+- **successful deployed Nova normal/correction trace:** not yet proved
 
-**NOT CLAIMED**
+See [`docs/EVIDENCE_AND_CLAIM_FENCE.md`](docs/EVIDENCE_AND_CLAIM_FENCE.md).
 
-- production readiness
-- managed cloud memory
-- generalized long-term companionship
-- automatic continuation of authority after interruption
-- managed durable recovery
-- successful deployed model behavior until a live invocation completes
+## Why it matters
 
-## Why this matters
+Genie Lite separates things agent systems often blur together:
 
-Genie Lite separates conversational continuity from specialist work and from human authority.
+> **Conversation does not equal authority.**  
+> **Routing does not equal execution.**  
+> **Recovery does not equal permission to resume.**
 
-Conversation does not equal authority. Routing does not equal execution. Recovery does not equal permission to resume. Receipts make those boundaries inspectable.
+The design goal is simple: let the human carry less operational complexity without surrendering the decisions that matter.
 
 ## Architecture
 
 See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
-## Evidence
+## Quick start
 
-See [`docs/EVIDENCE_AND_CLAIM_FENCE.md`](docs/EVIDENCE_AND_CLAIM_FENCE.md) and [`docs/BUILD_STATUS_2026-09-13.md`](docs/BUILD_STATUS_2026-09-13.md).
+### Prerequisites
 
-## Test without model calls
+- Python 3.10+
+- `uv`
+- AWS CLI credentials for an account with Amazon Bedrock access
+- AgentCore CLI
+- access to `amazon.nova-pro-v1:0` in `us-east-1`
+
+### Install and run deterministic tests
 
 ```bash
-cd app/GenieLite
-python -m unittest discover -s tests -v
+git clone https://github.com/finious/genie-lite.git
+cd genie-lite/app/GenieLite
+uv sync
+uv run python -m unittest discover -s tests -v
 ```
 
-## Local validation
+### Validate the AgentCore project
+
+From the repository root:
 
 ```bash
 agentcore validate --json
 ./scripts/check-local.sh
 ```
 
-## Frozen live proof inputs
+### Local AgentCore development
 
-Normal request:
-
-```text
-I want to make a one-page public explainer for Genie Lite that a hackathon judge can understand in 30 seconds.
+```bash
+agentcore dev
 ```
 
-Correction:
+Then invoke locally with the frozen normal request:
 
-```text
-Don't sell it as an AI friend. Make human authority, specialist routing, receipts, and recovery the center.
+```bash
+agentcore invoke --local '{"prompt":"I want to make a one-page public explainer for Genie Lite that a hackathon judge can understand in 30 seconds."}'
 ```
 
-The live proof passes only if the correction materially changes the next brief/result and the returned receipt preserves the human authority boundary.
+Follow with the correction:
 
-## Deployment
+```bash
+agentcore invoke --local '{"prompt":"Don’t sell it as an AI friend. Make human authority, specialist routing, receipts, and recovery the center."}'
+```
 
-Deployment was explicitly authorized and completed. The runtime is `READY` in AgentCore. The remaining live-model gap is provider throttling on Nova invocation, preserved as an external limitation rather than hidden or routed around.
+The proof passes only if the correction materially changes the next brief/result and the returned receipt preserves the human authority boundary.
 
-## Continue safely
+## Built with
 
-Start with [`CONTINUE_HERE.md`](CONTINUE_HERE.md).
+- Strands Agents
+- Amazon Bedrock AgentCore
+- Amazon Nova Pro (`amazon.nova-pro-v1:0`)
+- Python
+- AgentCore CodeZip deployment
+
+## Judge path
+
+Start with [`docs/JUDGE_START_HERE.md`](docs/JUDGE_START_HERE.md).
+
+## License
+
+MIT. See [`LICENSE`](LICENSE).
