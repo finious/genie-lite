@@ -55,7 +55,9 @@ The design goal is simple: let the human carry less operational complexity witho
 
 ## Architecture
 
-See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
+![Genie Lite architecture](docs/assets/genie_lite_architecture.png)
+
+See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for the detailed system description.
 
 ## Quick start
 
