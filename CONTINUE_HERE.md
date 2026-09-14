@@ -1,10 +1,10 @@
 # CONTINUE GENIE LITE WITHOUT JETS
 
-This is the shortest safe path from the current repository to a contest
-submission. Start here if the prior operator is unavailable.
+This is the shortest safe path from the current repository to final contest submission. Start here if the prior operator is unavailable.
 
 ## Current truth
 
+- Public repository: **PROVEN** at `finious/genie-lite`
 - Local specimen: built
 - Runtime: Strands on Amazon Bedrock AgentCore
 - Model: `amazon.nova-pro-v1:0`
@@ -12,14 +12,25 @@ submission. Start here if the prior operator is unavailable.
 - Frozen seam: `JIMMY → ECHO → CREATE → ECHO → JIMMY`
 - Credit-free tests: six passing
 - AgentCore configuration: valid
-- AWS deployment: not performed
+- AWS deployment: **COMPLETED**
+- Runtime state: **DEPLOYED / READY** in `us-east-1`
+- Post-deploy diff: no differences
+- Repeat deploy: no changes
 - Managed memory: not added
-- Last live attempt: blocked by AWS account verification
-- Remote custody: **PROVEN** at public repository `finious/genie-lite`
-- Two-shift execution card: `docs/GENIE_LITE_TWO_SHIFT_DIRECTION_2026-09-13.md`
+- First deployed Nova invocation: provider daily-token throttling
+- Successful deployed normal/correction trace: not yet proved
 
-The detailed blocker receipt is
-`docs/evidence/LIVE_NOVA_ATTEMPT_2026-09-13.md`.
+Primary release packet:
+
+`docs/SUBMISSION_RELEASE_PACKET_2026-09-14.md`
+
+Public truth table:
+
+`docs/EVIDENCE_AND_CLAIM_FENCE.md`
+
+Deployment + throttle receipt:
+
+`docs/evidence/DEPLOYED_RUNTIME_AND_THROTTLE_RECEIPT_2026-09-13.md`
 
 ## 1. Recover the room
 
@@ -29,125 +40,76 @@ From the repository root:
 git status --short --branch
 git log --oneline --decorate -5
 ./scripts/check-local.sh
-```
-
-Expected result: clean working tree, all six tests pass, AgentCore validation
-returns success, Nova Pro is found, and tutorial defaults are absent.
-
-If any expected result fails, stop and fix that result before making model
-calls or touching deployment.
-
-## 2. Establish GitHub custody
-
-Public GitHub custody is now established at:
-
-`https://github.com/finious/genie-lite`
-
-Before continuing after any handoff, a receiver should independently open the
-repository and confirm the README heading, current commit, and
-`docs/BUILD_STATUS_2026-09-13.md`. Access is not knowledge until a receiver
-reads the object.
-
-## 3. Retry the live Nova proof once
-
-Do not retry until AWS account verification has had the window stated in the
-captured AWS error. Do not change models or regions to route around verification.
-
-Terminal A:
-
-```bash
-agentcore dev --logs --no-traces
-```
-
-Terminal B, frozen normal trace:
-
-```bash
-agentcore dev --stream "I want to make a one-page public explainer for Genie Lite that a hackathon judge can understand in 30 seconds."
-```
-
-Then the frozen correction in the same local session:
-
-```bash
-agentcore dev --stream "Don't sell it as an AI friend. Make human authority, specialist routing, receipts, and recovery the center."
-```
-
-Capture the returned text and server log. The live proof passes only when:
-
-1. Echo names the human goal.
-2. The route to CREATE is visible.
-3. CREATE returns a bounded proposal.
-4. Echo returns it without claiming approval, execution, or verification.
-5. The correction materially changes the next brief and result.
-6. The receipt names authority and unproven claims.
-
-If AWS repeats the account-verification error, stop model calls and preserve the
-new receipt. If the stated verification window has elapsed, use the support
-route named in AWS's error.
-
-## 4. Preflight deployment without deploying
-
-Only after the local live proof passes:
-
-```bash
-agentcore validate --json
-aws configure get region
-cat agentcore/aws-targets.json
-aws sts get-caller-identity
-aws bedrock list-foundation-models --region us-east-1 --query 'modelSummaries[?modelLifecycle.status==`ACTIVE`].modelId' --output table
-agentcore deploy --dry-run
-agentcore deploy --diff
-```
-
-Stop if the authenticated account, configured region, deployment target, or
-Nova availability do not align. The current application code expects
-`us-east-1`; the operator must not silently deploy into the Ohio console region
-shown during setup.
-
-Return the dry-run/diff with these consequences:
-
-- exact AWS account and region
-- resources AgentCore/CDK proposes to create
-- IAM roles or permissions required
-- expected cost surface and cleanup owner
-- current tests and live-trace evidence
-- unresolved gaps
-
-## 5. Human gate
-
-Do not deploy on phrases such as “may deploy,” “looks good,” or “green.” Stop
-for the exact authorization:
-
-> **AUTHORIZE DEPLOY**
-
-Only after that authorization:
-
-```bash
-agentcore deploy -y -v
 agentcore status --json
 ```
 
-Invoke the deployed runtime with the frozen normal and correction inputs,
-capture the receipts, and update the build-status document. Do not claim managed
-durable recovery because this contest specimen intentionally has no AgentCore
-Memory resource.
+Expected result: clean working tree, six tests pass, AgentCore validation passes, Nova Pro is configured, tutorial defaults are absent, and the deployed GenieLite runtime reports READY.
 
-## 6. Submission evidence
+If any of those facts materially changed, stop and inspect before making new claims.
 
-The minimum package is:
+## 2. Lock the submission surface first
 
-- public repository and receiver-read receipt
-- passing credit-free test output
-- successful normal and correction live traces
-- recovery/authority deterministic trace
-- deployment dry-run/diff receipt
-- deployed status and invocation receipt, if deployment was authorized
-- honest limitations and unproven claims
-- short demo showing `human → Echo → CREATE → Echo → human`
+Before any provider retry, confirm these files tell the same story:
+
+- `README.md`
+- `docs/ARCHITECTURE.md`
+- `docs/BUILD_STATUS_2026-09-13.md`
+- `docs/EVIDENCE_AND_CLAIM_FENCE.md`
+- `docs/DEVPOST_SUBMISSION_DRAFT.md`
+- `docs/DEMO_SCRIPT_TWO_BRANCHES.md`
+- `docs/SUBMISSION_RELEASE_PACKET_2026-09-14.md`
+
+The governing distinction is:
+
+> **The submission is already real. Live invocation is an evidence upgrade.**
+
+## 3. Give Bedrock one clean evidence-upgrade attempt
+
+Use:
+
+`docs/ONE_SHOT_LIVE_PROOF_RUN_CARD.md`
+
+Run the frozen deployed normal request once.
+
+If it succeeds, immediately run the frozen correction in the same session and capture:
+
+- returned text
+- session ID
+- route / receipt evidence
+- the materially changed result
+- relevant logs / traces if available
+
+If provider throttling repeats, preserve the exact error and stop model retries. Do not switch model, region, architecture, or redeploy merely to manufacture a green result.
+
+## 4. Choose the demo branch
+
+Use `docs/DEMO_SCRIPT_TWO_BRANCHES.md`.
+
+- **Branch A** only if deployed normal + correction both complete successfully.
+- **Branch B** if the provider still throttles.
+
+Branch B is not a failure narrative. It shows the deployed READY runtime, deterministic mechanism proof, authority/recovery receipts, and the provider limitation honestly.
+
+## 5. Final submission pass
+
+Use the Devpost draft and release packet.
+
+Ask:
+
+> **Can every sentence in the submission be traced to evidence?**
+
+If not, cut it.
+
+Jimmy's role at this stage is:
+
+> **PROOF OWNER → RELEASE AUTHORITY → SUBMITTER**
 
 ## Stop rules
 
-Do not add managed memory, a second specialist, a UI, a new architecture, or
-10Q/MWC expansion before the contest proof is complete. Do not confuse useful
-state with continuing authority.
+Do not add managed memory, a second specialist, a UI, a new architecture, or 10Q/MWC implementation before submission.
 
-> **VERIFY IT. PUBLISH IT. RUN IT. PREVIEW IT. AUTHORIZE IT. DEPLOY IT. RECEIPT IT.**
+Do not repeatedly redeploy a READY runtime with a clean diff.
+
+Do not confuse deployment with successful model behavior, execution with verification, or recovered state with current authority.
+
+> **LOCK PACKAGE → ONE LIVE ATTEMPT → VERIFY → RECEIPT → CHOOSE DEMO BRANCH → CLAIM CHECK → SUBMIT.**
