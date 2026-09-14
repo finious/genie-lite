@@ -4,7 +4,7 @@
 
 ```mermaid
 flowchart LR
-    H[Jimmy / Human] -->|intent| E[Echo]
+    H[Human] -->|intent| E[Echo]
     E -->|structured specialist brief| C[CREATE]
     C -->|bounded specialist return| E
     E -->|return + receipt| H
@@ -12,44 +12,53 @@ flowchart LR
     H -. correction .-> E
     E -. revised brief .-> C
 
-    A[Human authority] -. governs consequential action .-> H
-    R[Receipts] -. record route, return, authority state, limits .-> E
+    A[Human authority] -. consequence boundary .-> H
+    R[Receipts] -. route + return + authority + limits .-> E
 ```
 
-## Core distinction
+## Core idea
 
-Echo is the conversational bridge. CREATE is the specialist. The human remains the authority boundary.
+Genie Lite keeps three roles separate:
 
-Genie Lite is designed to make these separations inspectable:
+1. **Human** — sets intent, corrects direction, and owns consequential authority.
+2. **Echo** — receives the request, carries context, routes specialist work, and returns results.
+3. **CREATE** — performs one bounded specialist task behind a visible route.
+
+The contest seam is:
+
+> **HUMAN → ECHO → CREATE → ECHO → HUMAN**
+
+## What makes the design different
+
+Genie Lite treats these distinctions as first-class behavior:
 
 - conversation does not equal authority
 - routing does not equal execution
 - execution does not equal verification
 - recovery does not equal permission to resume
 - a correction must materially change the next specialist brief/result
+- receipts expose what happened and what remains unproved
 
-## Frozen seam
+## Runtime architecture
 
-> **JIMMY → ECHO → CREATE → ECHO → JIMMY**
+- **Framework:** Strands Agents
+- **Runtime:** Amazon Bedrock AgentCore
+- **Model:** Amazon Nova Pro (`amazon.nova-pro-v1:0`)
+- **Deployment:** AgentCore CodeZip
+- **Region:** `us-east-1`
+- **Managed memory:** intentionally not configured for this contest specimen
+- **Runtime state:** deployed / `READY`
 
-## Consequential extension
+## Recovery / authority rule
 
-The broader governed pattern is:
+Useful state may be recovered after interruption, but stale consequential authority is not automatically restored.
 
-> **HUMAN → ECHO → CREATE → GOVERNANCE → HUMAN AUTHORIZE → ACTION → VERIFY → RECEIPT → ECHO → HUMAN**
-
-The contest specimen intentionally proves only the bounded Echo→CREATE seam plus authority, correction, receipt, and recovery rules. It does not claim the whole larger system is implemented.
-
-## Runtime
-
-- framework: Strands
-- hosting/runtime: Amazon Bedrock AgentCore
-- build: CodeZip
-- model: `amazon.nova-pro-v1:0`
-- region: `us-east-1`
-- managed memory: not configured
-- deployed runtime state: READY
+That allows continuity without turning a remembered conversation into silent permission to act.
 
 ## Evidence boundary
 
-The deterministic suite proves the local mechanism. AgentCore deployment proves the runtime exists and is READY. The successful deployed normal/correction model trace remains an evidence upgrade until a provider invocation completes without throttling.
+The deterministic suite proves the routing, correction, receipt, and recovery/authority mechanism. AgentCore deployment proves that the runtime exists and reports `READY`.
+
+The first deployed Nova invocation was throttled by the provider daily-token quota, so a successful deployed normal/correction conversation is not claimed until it is actually observed.
+
+See [`EVIDENCE_AND_CLAIM_FENCE.md`](EVIDENCE_AND_CLAIM_FENCE.md) for the public truth table.
