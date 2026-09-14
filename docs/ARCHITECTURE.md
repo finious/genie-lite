@@ -1,5 +1,7 @@
 # Genie Lite Architecture
 
+![Genie Lite architecture: Human to Echo to CREATE to receipt and back to Human](assets/genie_lite_architecture.png)
+
 ## Judge path in 30 seconds
 
 ```mermaid

@@ -2,18 +2,26 @@
 
 This checklist mirrors the contest requirements and keeps the public submission surface focused on what judges need.
 
+**Official deadline:** September 14, 2026 at 5:00 PM Pacific (`2026-09-15T00:00:00Z`).
+
+**Current Devpost state:** the public Genie Lite project page exists, but the Agents for Humans entry has not been finally submitted (`submitted_at` is still empty). Publishing a project page is not the same as submitting it to the hackathon.
+
 ## Required submission pieces
 
 - [x] **Text description** — draft in [`DEVPOST_SUBMISSION_DRAFT.md`](DEVPOST_SUBMISSION_DRAFT.md)
+- [x] **Devpost project shell** — name, tagline, description, technologies, and repository link loaded
 - [x] **Public code repository** — `https://github.com/finious/genie-lite`
 - [x] **Source code and setup instructions** — root [`README.md`](../README.md)
 - [x] **MIT license** — [`LICENSE`](../LICENSE)
 - [x] **README** — judge-facing and reproducible
 - [x] **Architecture description** — [`ARCHITECTURE.md`](ARCHITECTURE.md)
-- [x] **Architecture diagram asset** — prepared as `genie_lite_architecture.png` for Devpost upload
+- [x] **Architecture diagram asset prepared** — [`assets/genie_lite_architecture.png`](assets/genie_lite_architecture.png)
+- [ ] **Architecture diagram uploaded to Devpost** — upload the PNG to the required file field
 - [ ] **Demo video (≤5 minutes)** — use [`DEMO_SCRIPT_TWO_BRANCHES.md`](DEMO_SCRIPT_TWO_BRANCHES.md)
 - [ ] **AWS Builder ID** — enter in Devpost form
-- [ ] **Devpost submission fields** — select Professional Agents and complete required identity fields
+- [ ] **Required Devpost answers** — Submitter Type, Country, Professional Agents track, public repo URL, and AWS Builder ID
+- [x] **GitHub About license** — GitHub detects the repository license as MIT
+- [ ] **Final Devpost submit** — verify the preview, then submit before the official deadline
 
 ## Demo must cover
 
